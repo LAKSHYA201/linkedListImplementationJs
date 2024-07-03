@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Check Console -></h1>
+    <script>
+      class node {
+        constructor(value) {
+          this.value = value;
+          this.nextNode = null;
+        }
+      }
+      class linkedList {
+        constructor() {
+          this.head = null;
+          this.size = 0;
+        }
+        append(value) {
+          let newNode = new node(value);
+          if (this.size === 0) {
+            this.head = newNode;
+          } else {
+            let current = this.head;
+            while (current.nextNode) {
+              current = current.nextNode;
+            }
+            current.nextNode = newNode;
+          }
+          this.size++;
+        }
+        prepend(value) {
+          let newNode = new node(value);
+          if (this.size === 0) {
+            this.head = newNode;
+          } else {
+            let afterNode = this.head;
+            this.head = newNode;
+            this.head.nextNode = afterNode;
+          }
+          this.size++;
+        }
+        listSize() {
+          console.log(this.size);
+        }
+        returnHead() {
+          console.log(this.head);
+        }
+        returnTail() {
+          let current = this.head;
+          while (current.nextNode) current = current.nextNode;
+          console.log(current);
+        }
+        atIndex(value) {
+          let i = 0;
+          let current = this.head;
+          if (value > this.size - 1) {
+            console.log("Node doesnt exist");
+          } else {
+            while (i < value) {
+              current = current.nextNode;
+              i++;
+            }
+            console.log(current);
+          }
+        }
+        pop() {
+          if (this.size == 0) {
+            console.log("Linked list empty");
+          } else {
+            let current = this.head;
+            let i = 0;
+            while (i < this.size - 2) {
+              current = current.nextNode;
+              i++;
+            }
+            current.nextNode = null;
+            this.size--;
+          }
+        }
+        contains(data) {
+          let current = this.head;
+          if (this.size == 0) {
+            console.log("list is empty");
+          } else {
+            while (current.nextNode) {
+              if (current.value == data) {
+                console.log("Contains!");
+                return;
+              }
+              current = current.nextNode;
+            }
+            console.log("Doesnt Contain!");
+            return;
+          }
+        }
+        findIndex(data) {
+          let index = 1;
+          let current = this.head;
+          if (this.size == 0) {
+            console.log("list is empty");
+          } else if (this.head.value == data) {
+            console.log("at index 0");
+            return;
+          } else {
+            while (current.nextNode) {
+              current = current.nextNode;
+              if (current.value == data) {
+                console.log(`at index ${index}`);
+                return;
+              }
+
+              index++;
+            }
+            console.log("Doesnt Contain!");
+            return;
+          }
+        }
+        toString() {
+          let current = this.head;
+          let stringForm = `(${current.value}) -> `;
+          while (current.nextNode) {
+            current = current.nextNode;
+            let nodeString = current.value;
+            stringForm += `(${nodeString}) -> `;
+          }
+          stringForm += ` null`;
+          console.log(stringForm);
+        }
+      }
+      let alpha = new linkedList();
+      alpha.append("Supra");
+      alpha.append("BMW");
+      alpha.append("Mercedes");
+      alpha.prepend("Suzuki");
+      alpha.prepend("Toyota");
+      alpha.listSize();
+      alpha.returnHead();
+      alpha.returnTail();
+      alpha.atIndex(5);
+      alpha.pop();
+      alpha.contains("Mercedes");
+      alpha.findIndex("Suzuki");
+      alpha.toString();
+      console.log(alpha);
+    </script>
+  </body>
+</html>
